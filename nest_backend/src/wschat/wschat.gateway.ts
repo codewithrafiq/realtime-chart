@@ -11,7 +11,11 @@ import { CreateWschatDto } from './dto/create-wschat.dto';
 import { UpdateWschatDto } from './dto/update-wschat.dto';
 import { WschatService } from './wschat.service';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  },
+})
 export class WschatGateway implements OnGatewayInit {
   constructor(private readonly wschatService: WschatService) {}
 
@@ -23,6 +27,8 @@ export class WschatGateway implements OnGatewayInit {
   }
   @SubscribeMessage('createWschat')
   create(@MessageBody() createWschatDto: CreateWschatDto) {
+    console.log('createWschat---->', createWschatDto);
+
     return this.wschatService.create(createWschatDto);
   }
 
@@ -45,4 +51,7 @@ export class WschatGateway implements OnGatewayInit {
   remove(@MessageBody() id: number) {
     return this.wschatService.remove(id);
   }
+
+
+
 }

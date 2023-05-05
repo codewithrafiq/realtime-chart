@@ -21,12 +21,16 @@ export class CharteapisController {
 
   @Post()
   create(@Body() createCharteapiDto: CreateCharteapiDto) {
+    this.wschatService.socket.emit('createWschat', createCharteapiDto.number);
     return this.charteapisService.create(createCharteapiDto);
   }
 
   @Get()
   findAll() {
-    this.wschatService.socket.emit('charteapis', this.charteapisService.findAll());
+    this.wschatService.socket.emit(
+      'charteapis',
+      this.charteapisService.findAll(),
+    );
 
     return this.charteapisService.findAll();
   }

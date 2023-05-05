@@ -8,6 +8,8 @@ export class WschatService {
   public socket: Server = null;
 
   create(createWschatDto: CreateWschatDto) {
+    
+    this.socket.emit('createWschat', createWschatDto);
     return 'This action adds a new wschat';
   }
 

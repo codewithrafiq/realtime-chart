@@ -1,1 +1,3 @@
-export class CreateCharteapiDto {}
+export class CreateCharteapiDto {
+  number: number;
+}
